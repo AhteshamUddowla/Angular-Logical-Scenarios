@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-12 text-end">
+        <button class="btn btn-sm btn-primary" (click)="onAdd()">Add New</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-success">
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email-Id</th>
+                    <th>Phone</th>
+                    <th>Website</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of userArray; let srNo=index">
+                    <td>{{srNo+1}}</td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" [(ngModel)]="user.name" />
+                        </div>
+                        <div *ngIf="!user.isEdit">
+                            {{user.name}}
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" [(ngModel)]="user.username" />
+                        </div>
+                        <div *ngIf="!user.isEdit">
+                            {{user.username}}
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" [(ngModel)]="user.email" />
+                        </div>
+                        <div *ngIf="!user.isEdit">
+                            {{user.email}}
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="user.isEdit">
+                            <input type="text" [(ngModel)]="user.phone" />
+                        </div>
+                        <div *ngIf="!user.isEdit">
+                            {{user.phone}}
+                        </div>
+                    </td>
+                    <td>{{user.website}}</td>
+                    <td class="text-center"> 
+                        <div *ngIf="!user.isEdit">
+                            <i class="fa-solid fa-pen-to-square px-2" (click)="onEdit(user)"></i>
+                            <i class="fa-solid fa-trash-can" (click)="onDelete(user)"></i>
+                        </div>
+                        <div *ngIf="user.isEdit">
+                            <i class="fa-solid fa-cloud px-2" (click)="onUpdate(user)"></i>
+                            <i class="fa-solid fa-circle-xmark" (click)="onCancel(user)"></i>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

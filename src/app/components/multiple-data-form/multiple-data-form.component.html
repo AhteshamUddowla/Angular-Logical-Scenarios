@@ -1,0 +1,184 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-end">
+            <!-- <button class="btn btn-sm btn-success" (click)="isNewDiv = !isNewDiv">Add</button> -->
+        </div>
+    </div>
+    <div class="row" *ngIf="isNewDiv">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <div class="row">
+                        <div class="col-6"> New</div>
+                        <div class="col-6 text-end">
+                            <button class="btn btn-sm btn-primary" (click)="onClose()">CLose</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for=""><b>Name</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Name" [(ngModel)]="employeeObj.name">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for=""><b>Contact No</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Contact No" [(ngModel)]="employeeObj.contactNo">
+                                </div>
+                                <div class="col-4">
+                                    <label for=""><b>Email</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Email"  [(ngModel)]="employeeObj.email">
+                                </div>
+                                <div class="col-4">
+                                    <label for=""><b>City</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter City"  [(ngModel)]="employeeObj.city">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for=""><b>State</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter State"  [(ngModel)]="employeeObj.state">
+                                </div>
+                                <div class="col-4">
+                                    <label for=""><b>Pincode</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Pincode" [(ngModel)]="employeeObj.pinCode">
+                                </div>
+                                <div class="col-4">
+                                    <label for=""><b>Dasignation</b></label>
+                                    <select class="form-control"  [(ngModel)]="employeeObj.designation">
+                                        <option value="">Select</option>
+                                        <option value="Jr Developer">Jr Developer</option>
+                                        <option value="Sr Developer">Sr Developer</option>
+                                        <option value="Team Leader">Team Leader</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-6 text-end">
+                                    <button class="btn text-white btn-sm bg-secondary">Reset</button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn text-white btn-sm bg-success" *ngIf="employeeObj.empId==0" (click)="saveEmployee()">
+                                        <span class="spinner-border spinner-border-sm"> </span> Save Employee
+                                    </button>
+                                    <button class="btn text-white btn-sm bg-success" *ngIf="employeeObj.empId!=0" (click)="updateEmployee()">
+                                        <span                            class="spinner-border spinner-border-sm"></span> Update Employee
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for=""><b>Name</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Name" [(ngModel)]="empRelativeObj.name">
+                                </div>
+                                <div class="col-3">
+                                    <label for=""><b>Relation</b></label>
+                                    <select class="form-control" [(ngModel)]="empRelativeObj.relation">
+                                        <option value="">Select</option>
+                                        <option value="Mother">Mother</option>
+                                        <option value="Father">Father</option>
+                                        <option value="Sister">Sister</option>
+                                        <option value="Brother">Brother</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label for=""><b>Age</b></label>
+                                    <input type="text" class="form-control"
+                                        placeholder="Enter Age" [(ngModel)]="empRelativeObj.age">
+                                </div>
+                                <div class="col-1 mt-4 text-end">
+                                    <button class="btn btn-sm bg-primary" (click)="addRelative()">Add</button>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Relation</th>
+                                                <th>Age</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let relative of relativeList;">
+                                                <td>{{relative.name}}</td>
+                                                <td>{{relative.relation}}</td>
+                                                <td>{{relative.age}}</td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" *ngIf="!isNewDiv">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <div class="row">
+                        <div class="col-6">List</div>
+                        <div class="col-6 text-end">
+                            <button class="btn btn-sm btn-primary" (click)="isNewDiv = !isNewDiv">New</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sr No</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Designation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let employee of employeeList; let srNo=index">
+                                <td>{{srNo+1}}</td>
+                                <td>{{employee.name}}</td>
+                                <td>{{employee.contactNo}}</td>
+                                <td>{{employee.email}}</td>
+                                <td>{{employee.city}}</td>
+                                <td>{{employee.state}}</td>
+                                <td>{{employee.designation}}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm" (click)="getEmployee(employee.empId)">Edit</button>
+
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
