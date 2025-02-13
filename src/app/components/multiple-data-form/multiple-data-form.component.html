@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 text-end">
-            <!-- <button class="btn btn-sm btn-success" (click)="isNewDiv = !isNewDiv">Add</button> -->
+            <app-alert [message]="alertMessage" [isAlertVisible]="showAlert"></app-alert>
         </div>
     </div>
     <div class="row" *ngIf="isNewDiv">
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="col-6">
                                     <button class="btn text-white btn-sm bg-success" *ngIf="employeeObj.empId==0" (click)="saveEmployee()">
-                                        <span class="spinner-border spinner-border-sm"> </span> Save Employee
+                                        <span class="spinner-border spinner-border-sm" *ngIf="isApiCallInProgress"> </span> Save Employee
                                     </button>
                                     <button class="btn text-white btn-sm bg-success" *ngIf="employeeObj.empId!=0" (click)="updateEmployee()">
-                                        <span                            class="spinner-border spinner-border-sm"></span> Update Employee
+                                        <span class="spinner-border spinner-border-sm" *ngIf="isApiCallInProgress"></span> Update Employee
                                     </button>
                                 </div>
                             </div>
@@ -162,7 +162,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let employee of employeeList; let srNo=index">
+                            <ng-container *ngIf="!isTableLoader">
+                                <tr *ngFor="let employee of employeeList; let srNo=index">
                                 <td>{{srNo+1}}</td>
                                 <td>{{employee.name}}</td>
                                 <td>{{employee.contactNo}}</td>
@@ -173,9 +174,21 @@
                                 <td>
                                     <button class="btn btn-primary btn-sm" (click)="getEmployee(employee.empId)">Edit</button>
 
-                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm btn-danger" (click)="onDelete(employee.empId)">Delete</button>
                                 </td>
                             </tr>
+                            </ng-container>
+                            <ng-container *ngIf="isTableLoader">
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status">
+                                              <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                          </div>
+                                    </td>
+                                </tr>
+                            </ng-container>
                         </tbody>
                     </table>
                 </div>

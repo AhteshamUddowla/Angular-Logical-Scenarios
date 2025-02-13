@@ -5,5 +5,6 @@ export const Constant = {
         GET_EMPLOYEE: "GetEmployeeById?id=",
         CREATE_EMPLOYEE: "CreateEmployee",
         UPDATE_EMPLOYEE: "UpdateEmployee",
+        DELETE_EMPLOYEE: "DeleteEmployeeById?id=",
     }
 }
